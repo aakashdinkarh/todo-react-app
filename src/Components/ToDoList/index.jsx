@@ -10,7 +10,7 @@ const RenderTodoList = ({ todos = [], darkMode, toggleCheck, handleEdit, deleteT
 			<label className={todo.checked ? 'checked' : ''}>
 				<Input type='checkbox' checked={todo.checked} onChange={() => toggleCheck(todo)} />
 			</label>
-			<Link to={`todo/${todo.id}`}>{todo.text}</Link>
+			<Link to={`/todo/${todo.id}`}>{todo.text}</Link>
 			<Button className='editBtn' darkMode={darkMode} onClick={() => handleEdit(todo)}>
 				<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 121.48 122.88' xmlSpace='preserve'>
 					<path
@@ -27,9 +27,9 @@ const RenderTodoList = ({ todos = [], darkMode, toggleCheck, handleEdit, deleteT
 };
 
 export const ToDoList = ({ searchTerm, todos, setToDos, darkMode }) => {
-	const isSearch = searchTerm === '';
+	const isSearch = searchTerm !== '';
 
-	const resultsText = isSearch ? 'All todos...' : 'Showing search results...';
+	const resultsText = isSearch ? 'Showing search results...' : 'All todos...';
 	const todosToShow = isSearch ? todos.filter((todo) => todo.text.includes(searchTerm)) : todos;
 
 	const deleteToDo = useCallback(

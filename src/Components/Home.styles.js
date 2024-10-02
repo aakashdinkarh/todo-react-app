@@ -90,8 +90,6 @@ export const TodosList = styled.div`
     text-decoration: line-through;
   }
   a {
-    color: black;
-    display: inline-block;
     text-decoration: none;
     white-space: nowrap;
     overflow: hidden;

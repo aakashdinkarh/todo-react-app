@@ -47,22 +47,24 @@ const SingleToDo = () => {
 
   return (
     <Wrapper darkMode={darkMode}>
+      <p style={{display: 'flex', justifyContent: 'space-between'}}>
+        <div>
+          <Link to="/"><b>Home</b></Link> / todo
+        </div>
+        <TopContent>
+          <DarkModeSwitch darkMode={darkMode} setDarkMode={setDarkMode} />
+        </TopContent>
+      </p>
       {isLoading ? (
         <Spinner />
       ) : (
-        <>
-          <TopContent>
-            <DarkModeSwitch darkMode={darkMode} setDarkMode={setDarkMode} />
-          </TopContent>
-
-          <div style={styles["big-todo"]}>
-            <p style={styles.bold}>
-              {" "}
-              Status: {todo.checked ? "Done" : "Not-done"}
-            </p>
-            Description: {todo.text}
-          </div>
-        </>
+        <div style={styles["big-todo"]}>
+          <p style={styles.bold}>
+            {" "}
+            Status: {todo.checked ? "Done" : "Not-done"}
+          </p>
+          Description: {todo.text}
+        </div>
       )}
     </Wrapper>
   );
