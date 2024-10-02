@@ -1,11 +1,14 @@
 import { Link } from "react-router-dom";
 import { Wrapper } from "../Home.styles";
+import { useEffect, useState } from "react";
+import { getDarkThemePreferenceFromLocalStorage } from "../../utils/localStorageUtil";
 
 const NotFound = () => {
-  let darkMode;
-  if (localStorage.getItem("darkMode")) {
-    darkMode = JSON.parse(localStorage.getItem("darkMode"));
-  }
+  const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    setDarkMode(getDarkThemePreferenceFromLocalStorage());
+  }, [])
 
   return (
     <Wrapper darkMode={darkMode}>
