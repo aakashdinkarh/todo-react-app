@@ -13,7 +13,7 @@ import GlobalStyles from "./Global.Styles";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
+    <BrowserRouter basename={process.env.NODE_ENV === 'development' ? '/' : process.env.PUBLIC_URL}>
       <GlobalStyles />
       <Routes>
         <Route path="/" element={<Home />} />

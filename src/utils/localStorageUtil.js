@@ -2,7 +2,7 @@ export const saveTodosToLocalStorage = (todos) => {
     try {
         localStorage.setItem('storedTodos', JSON.stringify(todos));
     } catch {
-        alert('Cound not save, try again');
+        alert('Could not save, try again');
     }
 }
 
@@ -25,7 +25,7 @@ export const saveDarkThemePreferenceToLocalStorage = (preference) => {
     try {
         localStorage.setItem('darkMode', JSON.stringify(preference));
     } catch {
-        alert('Cound not save theme preference, try again');
+        alert('Could not save theme preference, try again');
     }
 }
 
@@ -46,8 +46,9 @@ export const getDarkThemePreferenceFromLocalStorage = () => {
 
 export const getSingleTodo = (id) => {
     const todos = getTodosFromLocalStorage();
+    const numberId = Number(id);
 
-    const todo = todos.find((todo) => todo.id === id);
+    const todo = todos.find((todo) => todo.id === numberId);
 
     return todo;
 }

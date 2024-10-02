@@ -1,5 +1,6 @@
 import { useCallback, useState } from "react";
 import { Button, Input } from "../Home.styles";
+import { saveTodosToLocalStorage } from "../../utils/localStorageUtil";
 
 export const AddToDo = ({ darkMode, setToDos }) => {
 	const [newToDo, setNewToDo] = useState('');
@@ -11,9 +12,12 @@ export const AddToDo = ({ darkMode, setToDos }) => {
 		// const id = await axios.post(url, { text: newToDo, checked: false });
 
 		setToDos((prevTodos) => {
-			const lastTodo = prevTodos[prevTodos.length - 1];
+			const lastTodo = prevTodos[prevTodos.length - 1] || { id: 0 };
 
-			return [...prevTodos, { id: lastTodo.id + 1, text: newToDo, checked: false }]
+			const newTodos = [...prevTodos, { id: lastTodo.id + 1, text: newToDo, checked: false }];
+
+			saveTodosToLocalStorage(newTodos);
+			return newTodos;
 		});
 		setNewToDo('');
 	  }, [newToDo]);

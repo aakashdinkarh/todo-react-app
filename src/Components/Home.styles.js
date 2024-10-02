@@ -115,7 +115,7 @@ export const TodosList = styled.div`
     position: absolute;
     top: 0;
     right: 30px;
-    padding: 0;
+    padding: 2px;
   }
 `;
 
