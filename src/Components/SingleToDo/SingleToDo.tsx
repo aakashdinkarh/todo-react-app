@@ -1,10 +1,14 @@
-import { useState, useEffect } from "react";
+
+import React from 'react';
+import { useState, useEffect, useLayoutEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 
-import { Wrapper, TopContent } from "../Home.styles";
-import { Spinner } from "../Spinner/Spinner.styles";
+import { Wrapper, TopContent } from "../Home.styled";
+import { Spinner } from "../Spinner/Spinner.styled";
 import { getDarkThemePreferenceFromLocalStorage, getSingleTodo } from "../../utils/localStorageUtil";
 import { DarkModeSwitch } from "../DarkModeSwitch";
+import { useThemeContext } from "../../hooks/useThemeContext";
+import { TTodo } from '../types';
 
 const styles = {
   "big-todo": {
@@ -23,17 +27,21 @@ const NoTodo = () => (
 );
 
 const SingleToDo = () => {
-  const [todo, setTodo] = useState({});
-  const [darkMode, setDarkMode] = useState(false);
+  const [todo, setTodo] = useState<TTodo | undefined>();
   const [isLoading, setIsLoading] = useState(false);
-  const { id } = useParams();
+  const { id: paramId } = useParams();
+  const id = paramId as string;
+
+  const { isDarkThemeEnabled, setIsDarkThemeEnabled } = useThemeContext();
+
+  useLayoutEffect(() => {
+    setIsDarkThemeEnabled(getDarkThemePreferenceFromLocalStorage());
+  }, [])
 
   useEffect(() => {
     setIsLoading(true);
 
-    setDarkMode(getDarkThemePreferenceFromLocalStorage());
-    setTodo(getSingleTodo(id));
-
+    setTodo(getSingleTodo(id));;
     // const getSingleTodo = async () => {
     //   const endpoint = await axios.get(`http://127.0.0.1:3001/todo/${id}`);
     // };
@@ -46,13 +54,13 @@ const SingleToDo = () => {
   }
 
   return (
-    <Wrapper darkMode={darkMode}>
+    <Wrapper isDarkThemeEnabled={isDarkThemeEnabled}>
       <p style={{display: 'flex', justifyContent: 'space-between'}}>
         <div>
           <Link to="/"><b>Home</b></Link> / todo
         </div>
         <TopContent>
-          <DarkModeSwitch darkMode={darkMode} setDarkMode={setDarkMode} />
+          <DarkModeSwitch />
         </TopContent>
       </p>
       {isLoading ? (

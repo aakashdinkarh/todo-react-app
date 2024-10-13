@@ -9,17 +9,20 @@ import SingleToDo from "./Components/SingleToDo/SingleToDo";
 
 //styled-components
 import GlobalStyles from "./Global.Styles";
+import { ThemeContextProvider } from "./Context/themeContext";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(document.getElementById("root")!);
 root.render(
   <React.StrictMode>
     <BrowserRouter basename={process.env.NODE_ENV === 'development' ? '/' : process.env.PUBLIC_URL}>
       <GlobalStyles />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/todo/:id" element={<SingleToDo />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <ThemeContextProvider>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/todo/:id" element={<SingleToDo />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </ThemeContextProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

@@ -1,20 +1,23 @@
-import { useState, useEffect } from "react";
+import React from 'react';
+import { useState, useEffect, useLayoutEffect } from "react";
 import {
   Wrapper,
   TopContent,
   Input,
-} from "./Home.styles";
+} from "./Home.styled";
 
-import { Spinner } from "./Spinner/Spinner.styles";
+import { Spinner } from "./Spinner/Spinner.styled";
 import { ToDoList } from "./ToDoList";
 import { getDarkThemePreferenceFromLocalStorage, getTodosFromLocalStorage } from "../utils/localStorageUtil";
 import { AddToDo } from "./AddToDo";
 import { DarkModeSwitch } from "./DarkModeSwitch";
+import { useThemeContext } from "../hooks/useThemeContext";
+import { TSearchForm, TTodos } from './types';
 
 // let i = 0;
 
 //search input
-const SearchForm = ({ searchTerm, setSearchTerm }) => (
+const SearchForm = ({ searchTerm, setSearchTerm }: TSearchForm) => (
   <Input
     type="search"
     placeholder="Search Task"
@@ -24,37 +27,37 @@ const SearchForm = ({ searchTerm, setSearchTerm }) => (
 );
 
 const Home = () => {
-  const [todos, setToDos] = useState([]);
+  const [todos, setToDos] = useState<TTodos>([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [darkMode, setDarkMode] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  const { isDarkThemeEnabled, setIsDarkThemeEnabled } = useThemeContext();
+
+  useLayoutEffect(() => {
+    setIsDarkThemeEnabled(getDarkThemePreferenceFromLocalStorage());
+  }, [])
 
   //initial render
   useEffect(() => {
     setIsLoading(true);
     setToDos(getTodosFromLocalStorage());
-    setDarkMode(getDarkThemePreferenceFromLocalStorage());
     setIsLoading(false);
   }, []);
 
   return (
-    <Wrapper darkMode={darkMode}>
+    <Wrapper isDarkThemeEnabled={isDarkThemeEnabled}>
       {isLoading ? (
         <Spinner />
       ) : (
         <>
           <TopContent>
-            <DarkModeSwitch darkMode={darkMode} setDarkMode={setDarkMode} />
+            <DarkModeSwitch />
 
-            <AddToDo
-              darkMode={darkMode}
-              setToDos={setToDos}
-            />
+            <AddToDo setToDos={setToDos} />
 
             <SearchForm
               searchTerm={searchTerm}
               setSearchTerm={setSearchTerm}
-              darkMode={darkMode}
             />
           </TopContent>
 
@@ -62,7 +65,6 @@ const Home = () => {
             todos={todos}
             setToDos={setToDos}
             searchTerm={searchTerm}
-            darkMode={darkMode}
           />
         </>
       )}

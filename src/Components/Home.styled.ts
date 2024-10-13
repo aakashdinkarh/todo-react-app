@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 //Wrapper
-export const Wrapper = styled.div`
-  background-color: ${({ darkMode }) =>
-    darkMode ? "var(--lightCoffee)" : "var(--dustyRose)"};
+export const Wrapper = styled.div<{isDarkThemeEnabled: boolean }>`
+  background-color: ${({ isDarkThemeEnabled }) =>
+    isDarkThemeEnabled ? "var(--lightCoffee)" : "var(--dustyRose)"};
   padding: 10px;
   height: 100%;
   overflow: auto;
@@ -56,26 +56,26 @@ export const Input = styled.input`
 `;
 
 //Normal Button
-export const Button = styled.button`
+export const Button = styled.button<{isDarkThemeEnabled: boolean }>`
   border: none;
   margin-left: 10px;
   border-radius: 3px;
   font-size: var(--fontMed);
-  background-color: ${({ darkMode }) =>
-    darkMode ? "var(--darkCoffee)" : "var(--roseWater)"};
+  background-color: ${({ isDarkThemeEnabled }) =>
+    isDarkThemeEnabled ? "var(--darkCoffee)" : "var(--roseWater)"};
   cursor: pointer;
-  opacity: ${({ darkMode }) => (darkMode ? "1" : "0.8")};
+  opacity: ${({ isDarkThemeEnabled }) => (isDarkThemeEnabled ? "1" : "0.8")};
   :hover {
-    opacity: ${({ darkMode }) => (darkMode ? "0.7" : "1")};
+    opacity: ${({ isDarkThemeEnabled }) => (isDarkThemeEnabled ? "0.7" : "1")};
   }
 `;
 
 //Todo List
-export const TodosList = styled.div`
+export const TodosList = styled.div<{isDarkThemeEnabled: boolean }>`
   padding: 10px;
   margin-top: 10px;
   border: 1px solid
-    ${({ darkMode }) => (darkMode ? "var(--darkCoffee)" : "var(--roseWater)")};
+    ${({ isDarkThemeEnabled }) => (isDarkThemeEnabled ? "var(--darkCoffee)" : "var(--roseWater)")};
   font-size: var(--fontMed);
   label {
     margin: 10px 0;
@@ -83,8 +83,8 @@ export const TodosList = styled.div`
   input {
     width: 17px;
     height: 17px;
-    accent-color: ${({ darkMode }) =>
-      darkMode ? "var(--darkCoffee)" : "var(--roseWater)"};
+    accent-color: ${({ isDarkThemeEnabled }) =>
+      isDarkThemeEnabled ? "var(--darkCoffee)" : "var(--roseWater)"};
   }
   .checked + a {
     text-decoration: line-through;
@@ -118,7 +118,7 @@ export const TodosList = styled.div`
 `;
 
 //Swtich
-export const Switch = styled.label`
+export const Switch = styled.label<{isDarkThemeEnabled: boolean }>`
   position: absolute;
   top: 0;
   right: 0;
@@ -134,8 +134,8 @@ export const Switch = styled.label`
     width: 100%;
     cursor: pointer;
     border-radius: 34px;
-    background-color: ${({ darkMode }) =>
-      darkMode ? "var(--roseWater)" : "var(--darkCoffee)"};
+    background-color: ${({ isDarkThemeEnabled }) =>
+      isDarkThemeEnabled ? "var(--roseWater)" : "var(--darkCoffee)"};
     -webkit-transition: 0.4s;
     transition: 0.4s;
   }

@@ -1,4 +1,7 @@
-export const saveTodosToLocalStorage = (todos) => {
+import { TTodos } from "../Components/types";
+const darkModeLocalStorageKey = '--saved--isDarkThemeEnabled';
+
+export const saveTodosToLocalStorage = (todos: TTodos) => {
     try {
         localStorage.setItem('storedTodos', JSON.stringify(todos));
     } catch {
@@ -7,13 +10,13 @@ export const saveTodosToLocalStorage = (todos) => {
 }
 
 export const getTodosFromLocalStorage = () => {
-    let storedTodos = []
+    let storedTodos: TTodos = [];
     try {
-        storedTodos = localStorage.getItem('storedTodos');
-        if (storedTodos) {
-            storedTodos = JSON.parse(storedTodos);
+        let storedData = localStorage.getItem('storedTodos');
+        if (storedData) {
+            storedData = JSON.parse(storedData);
         }
-        storedTodos = Array.isArray(storedTodos) ? storedTodos : [];
+        storedTodos = Array.isArray(storedData) ? storedData : [];
     } catch {
         storedTodos = [];
     }
@@ -21,9 +24,9 @@ export const getTodosFromLocalStorage = () => {
     return storedTodos;
 }
 
-export const saveDarkThemePreferenceToLocalStorage = (preference) => {
+export const saveDarkThemePreferenceToLocalStorage = (preference: boolean) => {
     try {
-        localStorage.setItem('darkMode', JSON.stringify(preference));
+        localStorage.setItem(darkModeLocalStorageKey, JSON.stringify(preference));
     } catch {
         alert('Could not save theme preference, try again');
     }
@@ -32,11 +35,11 @@ export const saveDarkThemePreferenceToLocalStorage = (preference) => {
 export const getDarkThemePreferenceFromLocalStorage = () => {
     let storedDarkThemePreference = false;
     try {
-        storedDarkThemePreference = localStorage.getItem('darkMode');
-        if (storedDarkThemePreference) {
-            storedDarkThemePreference = JSON.parse(storedDarkThemePreference);
+        let storedData = localStorage.getItem(darkModeLocalStorageKey);
+        if (storedData) {
+            storedData = JSON.parse(storedData);
         }
-        storedDarkThemePreference = typeof storedDarkThemePreference === 'boolean' ? storedDarkThemePreference : false;
+        storedDarkThemePreference = typeof storedData === 'boolean' ? storedData : false;
     } catch {
         storedDarkThemePreference = false;
     }
@@ -44,7 +47,7 @@ export const getDarkThemePreferenceFromLocalStorage = () => {
     return storedDarkThemePreference;
 }
 
-export const getSingleTodo = (id) => {
+export const getSingleTodo = (id: string) => {
     const todos = getTodosFromLocalStorage();
     const numberId = Number(id);
 

@@ -1,9 +1,13 @@
+import React from 'react';
 import { useCallback, useState } from "react";
-import { Button, Input } from "../Home.styles";
+import { Button, Input } from "../Home.styled";
 import { saveTodosToLocalStorage } from "../../utils/localStorageUtil";
+import { useThemeContext } from "../../hooks/useThemeContext";
+import { TAddToDo } from "../types";
 
-export const AddToDo = ({ darkMode, setToDos }) => {
+export const AddToDo = ({ setToDos }: TAddToDo) => {
 	const [newToDo, setNewToDo] = useState('');
+	const { isDarkThemeEnabled } = useThemeContext();
 
 	const addToDo = useCallback(() => {
 		if (newToDo === '') {
@@ -20,7 +24,7 @@ export const AddToDo = ({ darkMode, setToDos }) => {
 			return newTodos;
 		});
 		setNewToDo('');
-	  }, [newToDo]);
+	  }, [newToDo, setToDos]);
 	
 	return (
 	<div>
@@ -31,7 +35,7 @@ export const AddToDo = ({ darkMode, setToDos }) => {
 			type="text"
 		/>
 
-		<Button darkMode={darkMode} onClick={addToDo}>
+		<Button isDarkThemeEnabled={isDarkThemeEnabled} onClick={addToDo}>
 			Add Task
 		</Button>
 	</div>
