@@ -1,13 +1,12 @@
 
 import React from 'react';
-import { useState, useEffect, useLayoutEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import { Wrapper, TopContent } from "../Home.styled";
 import { Spinner } from "../Spinner/Spinner.styled";
-import { getDarkThemePreferenceFromLocalStorage, getSingleTodo } from "../../utils/localStorageUtil";
+import { getSingleTodo } from "../../utils/localStorageUtil";
 import { DarkModeSwitch } from "../DarkModeSwitch";
-import { useThemeContext } from "../../hooks/useThemeContext";
 import { TTodo } from '../types';
 
 const styles = {
@@ -32,12 +31,6 @@ const SingleToDo = () => {
   const { id: paramId } = useParams();
   const id = paramId as string;
 
-  const { isDarkThemeEnabled, setIsDarkThemeEnabled } = useThemeContext();
-
-  useLayoutEffect(() => {
-    setIsDarkThemeEnabled(getDarkThemePreferenceFromLocalStorage());
-  }, [])
-
   useEffect(() => {
     setIsLoading(true);
 
@@ -54,7 +47,7 @@ const SingleToDo = () => {
   }
 
   return (
-    <Wrapper isDarkThemeEnabled={isDarkThemeEnabled}>
+    <Wrapper>
       <p style={{display: 'flex', justifyContent: 'space-between'}}>
         <div>
           <Link to="/"><b>Home</b></Link> / todo

@@ -1,18 +1,22 @@
 import styled from "styled-components";
 
 //Wrapper
-export const Wrapper = styled.div<{isDarkThemeEnabled: boolean }>`
-  background-color: ${({ isDarkThemeEnabled }) =>
-    isDarkThemeEnabled ? "var(--lightCoffee)" : "var(--dustyRose)"};
+export const Wrapper = styled.div`
+  background-color: var(--bg-color);
+  color: var(--text-color);
   padding: 10px;
   height: 100%;
   overflow: auto;
   min-width: 300px;
+
+  a {
+    color: var(--text-color);
+  }
 `;
 
 export const TopContent = styled.div`
   position: relative;
-  > div {
+  > div, form {
     display: flex;
   }
   > input {
@@ -24,11 +28,13 @@ export const TopContent = styled.div`
   }
 
   @media screen and (max-width: 400px) {
-    > div {
+    > div > form {
       flex-direction: column;
       align-items: flex-start;
+
       button {
         margin: 10px 0;
+        padding: 8px;
       }
     }
     > input {
@@ -56,35 +62,37 @@ export const Input = styled.input`
 `;
 
 //Normal Button
-export const Button = styled.button<{isDarkThemeEnabled: boolean }>`
+export const Button = styled.button`
   border: none;
   margin-left: 10px;
   border-radius: 3px;
   font-size: var(--fontMed);
-  background-color: ${({ isDarkThemeEnabled }) =>
-    isDarkThemeEnabled ? "var(--darkCoffee)" : "var(--roseWater)"};
+  background-color: var(--accent-color);
+  color: var(--bg-color);
   cursor: pointer;
-  opacity: ${({ isDarkThemeEnabled }) => (isDarkThemeEnabled ? "1" : "0.8")};
   :hover {
-    opacity: ${({ isDarkThemeEnabled }) => (isDarkThemeEnabled ? "0.7" : "1")};
+    opacity: 0.7;
+  }
+
+  > svg {
+    fill: var(--bg-color);
   }
 `;
 
+export const Divider = styled.hr`
+  border: 1px solid var(--accent-color);
+`;
+
 //Todo List
-export const TodosList = styled.div<{isDarkThemeEnabled: boolean }>`
-  padding: 10px;
+export const TodosList = styled.div`
   margin-top: 10px;
-  border: 1px solid
-    ${({ isDarkThemeEnabled }) => (isDarkThemeEnabled ? "var(--darkCoffee)" : "var(--roseWater)")};
   font-size: var(--fontMed);
-  label {
-    margin: 10px 0;
-  }
+  background-color: var(--bg-color);
+  color: var(--text-color);
   input {
     width: 17px;
     height: 17px;
-    accent-color: ${({ isDarkThemeEnabled }) =>
-      isDarkThemeEnabled ? "var(--darkCoffee)" : "var(--roseWater)"};
+    accent-color: var(--accent-color);
   }
   .checked + a {
     text-decoration: line-through;
@@ -99,6 +107,8 @@ export const TodosList = styled.div<{isDarkThemeEnabled: boolean }>`
   p {
     position: relative;
     padding-right: 25px;
+    display: flex;
+    align-items: center;
   }
   button {
     width: 25px;
@@ -108,6 +118,7 @@ export const TodosList = styled.div<{isDarkThemeEnabled: boolean }>`
     position: absolute;
     top: 0;
     right: 0;
+    background-color: var(--secondary-color);
   }
   .editBtn {
     position: absolute;
@@ -118,7 +129,7 @@ export const TodosList = styled.div<{isDarkThemeEnabled: boolean }>`
 `;
 
 //Swtich
-export const Switch = styled.label<{isDarkThemeEnabled: boolean }>`
+export const Switch = styled.label`
   position: absolute;
   top: 0;
   right: 0;
@@ -134,8 +145,7 @@ export const Switch = styled.label<{isDarkThemeEnabled: boolean }>`
     width: 100%;
     cursor: pointer;
     border-radius: 34px;
-    background-color: ${({ isDarkThemeEnabled }) =>
-      isDarkThemeEnabled ? "var(--roseWater)" : "var(--darkCoffee)"};
+    background-color: var(--dark-bg-color);
     -webkit-transition: 0.4s;
     transition: 0.4s;
   }
@@ -147,13 +157,13 @@ export const Switch = styled.label<{isDarkThemeEnabled: boolean }>`
     border-radius: 50%;
     left: 5px;
     bottom: 4px;
-    background-color: white;
+    background-color: var(--bg-color);
     -webkit-transition: 0.4s;
     transition: 0.4s;
   }
 
   input:checked + .slider {
-    background-color: var(--roseWater);
+    background-color: var(--light-bg-color);
   }
   input:checked + .slider:before {
     transform: translateX(80%);

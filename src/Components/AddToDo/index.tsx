@@ -2,12 +2,10 @@ import React from 'react';
 import { useCallback, useState } from "react";
 import { Button, Input } from "../Home.styled";
 import { saveTodosToLocalStorage } from "../../utils/localStorageUtil";
-import { useThemeContext } from "../../hooks/useThemeContext";
 import { TAddToDo } from "../types";
 
 export const AddToDo = ({ setToDos }: TAddToDo) => {
 	const [newToDo, setNewToDo] = useState('');
-	const { isDarkThemeEnabled } = useThemeContext();
 
 	const addToDo = useCallback(() => {
 		if (newToDo === '') {
@@ -28,16 +26,18 @@ export const AddToDo = ({ setToDos }: TAddToDo) => {
 	
 	return (
 	<div>
-		<Input
-			onChange={(e) => setNewToDo(e.target.value)}
-			value={newToDo}
-			placeholder="New Task..."
-			type="text"
-		/>
+		<form onSubmit={(e) => e.preventDefault()}>
+			<Input
+				onChange={(e) => setNewToDo(e.target.value)}
+				value={newToDo}
+				placeholder="New Task..."
+				type="text"
+			/>
 
-		<Button isDarkThemeEnabled={isDarkThemeEnabled} onClick={addToDo}>
-			Add Task
-		</Button>
+			<Button type='submit' onClick={addToDo}>
+				Add Task
+			</Button>
+		</form>
 	</div>
 )
 };

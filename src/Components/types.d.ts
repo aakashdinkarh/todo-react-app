@@ -18,7 +18,6 @@ export type TToDoList = {
 
 export type TRenderTodoList = {
   todos: TTodos;
-  isDarkThemeEnabled: boolean;
   toggleCheck: (todo: TTodo) => void;
   handleEdit: (todo: TTodo) => void;
   deleteToDo: (todoId: number) => void;

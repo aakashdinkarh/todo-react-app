@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import { useCallback } from "react";
 import { Switch } from "../Home.styled"
-import { saveDarkThemePreferenceToLocalStorage } from "../../utils/localStorageUtil";
-import { useThemeContext } from "../../hooks/useThemeContext";
+import { getDarkThemePreferenceFromLocalStorage, saveDarkThemePreferenceToLocalStorage } from "../../utils/localStorageUtil";
 
 export const DarkModeSwitch = () => {
-    const { isDarkThemeEnabled, setIsDarkThemeEnabled } = useThemeContext();
+    const [isDarkThemeEnabled, setIsDarkThemeEnabled] = useState(true);
+
+    useLayoutEffect(() => {
+        setIsDarkThemeEnabled(getDarkThemePreferenceFromLocalStorage());
+    }, [])
 
     const changeDarkMode = useCallback(() => {
         setIsDarkThemeEnabled(!isDarkThemeEnabled);
@@ -13,7 +16,7 @@ export const DarkModeSwitch = () => {
       }, [isDarkThemeEnabled, setIsDarkThemeEnabled]);
 
     return (
-        <Switch isDarkThemeEnabled={isDarkThemeEnabled}>
+        <Switch>
             <input
                 type="checkbox"
                 checked={isDarkThemeEnabled}

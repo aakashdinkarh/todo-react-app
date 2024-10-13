@@ -1,17 +1,17 @@
 import React from 'react';
-import { useState, useEffect, useLayoutEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   Wrapper,
   TopContent,
   Input,
+  Divider,
 } from "./Home.styled";
 
 import { Spinner } from "./Spinner/Spinner.styled";
 import { ToDoList } from "./ToDoList";
-import { getDarkThemePreferenceFromLocalStorage, getTodosFromLocalStorage } from "../utils/localStorageUtil";
+import { getTodosFromLocalStorage } from "../utils/localStorageUtil";
 import { AddToDo } from "./AddToDo";
 import { DarkModeSwitch } from "./DarkModeSwitch";
-import { useThemeContext } from "../hooks/useThemeContext";
 import { TSearchForm, TTodos } from './types';
 
 // let i = 0;
@@ -31,12 +31,6 @@ const Home = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const { isDarkThemeEnabled, setIsDarkThemeEnabled } = useThemeContext();
-
-  useLayoutEffect(() => {
-    setIsDarkThemeEnabled(getDarkThemePreferenceFromLocalStorage());
-  }, [])
-
   //initial render
   useEffect(() => {
     setIsLoading(true);
@@ -45,7 +39,7 @@ const Home = () => {
   }, []);
 
   return (
-    <Wrapper isDarkThemeEnabled={isDarkThemeEnabled}>
+    <Wrapper>
       {isLoading ? (
         <Spinner />
       ) : (
@@ -60,6 +54,8 @@ const Home = () => {
               setSearchTerm={setSearchTerm}
             />
           </TopContent>
+
+          <Divider />
 
           <ToDoList
             todos={todos}

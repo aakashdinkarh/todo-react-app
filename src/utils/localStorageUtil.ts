@@ -26,6 +26,11 @@ export const getTodosFromLocalStorage = () => {
 
 export const saveDarkThemePreferenceToLocalStorage = (preference: boolean) => {
     try {
+        if (preference) {
+			document.body.className = 'dark-theme';
+		} else {
+			document.body.className = 'light-theme';
+		}
         localStorage.setItem(darkModeLocalStorageKey, JSON.stringify(preference));
     } catch {
         alert('Could not save theme preference, try again');
