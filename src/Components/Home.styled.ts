@@ -81,18 +81,22 @@ export const Button = styled.button`
 
 export const Divider = styled.hr`
   border: 1px solid var(--accent-color);
+  margin-bottom: 0;
 `;
 
 //Todo List
 export const TodosList = styled.div`
-  margin-top: 10px;
   font-size: var(--fontMed);
   background-color: var(--bg-color);
   color: var(--text-color);
+  position: relative;
+
   input {
     width: 17px;
     height: 17px;
     accent-color: var(--accent-color);
+    margin-left: 10px;
+    margin-right: 10px;
   }
   .checked + a {
     text-decoration: line-through;
@@ -103,6 +107,7 @@ export const TodosList = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: calc(100% - 80px);
+    padding: 10px 6px;
   }
   p {
     position: relative;
@@ -110,19 +115,27 @@ export const TodosList = styled.div`
     display: flex;
     align-items: center;
   }
+  .todo-item {
+    transition: transform 0.3s ease;
+    position: absolute;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    top: 0;
+    left: 0;
+  }
   button {
     width: 25px;
     height: 25px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
   }
   .delBtn {
-    position: absolute;
-    top: 0;
     right: 0;
     background-color: var(--secondary-color);
   }
   .editBtn {
-    position: absolute;
-    top: 0;
     right: 30px;
     padding: 2px;
   }
