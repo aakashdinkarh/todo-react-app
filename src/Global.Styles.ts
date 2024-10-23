@@ -10,7 +10,9 @@ body.light-theme {
   --bg-color: #f0f2f5;
   --text-color: #000;
   --accent-color: #6c63ff;
-  --secondary-color: #fd79a8;
+  // --secondary-color: #fd79a8;
+  // --secondary-color: #d5004c;
+  --secondary-color: #ff3d82;
 }
   
 body.dark-theme {

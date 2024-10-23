@@ -50,7 +50,7 @@ const SingleToDo = () => {
     <Wrapper>
       <p style={{display: 'flex', justifyContent: 'space-between'}}>
         <div>
-          <Link to="/"><b>Home</b></Link> / todo
+          <Link className='breadcrumb' to="/"><b>Home</b></Link> / todo
         </div>
         <TopContent>
           <DarkModeSwitch />
@@ -60,9 +60,8 @@ const SingleToDo = () => {
         <Spinner />
       ) : (
         <div style={styles["big-todo"]}>
-          <p style={styles.bold}>
-            {" "}
-            Status: {todo.checked ? "Done" : "Not-done"}
+          <p className='status-text' style={styles.bold}>
+            Status: <span >{todo.checked ? "Done" : "Not-done"}</span>
           </p>
           Description: {todo.text}
         </div>

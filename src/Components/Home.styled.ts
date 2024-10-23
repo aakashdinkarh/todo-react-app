@@ -12,6 +12,12 @@ export const Wrapper = styled.div`
   a {
     color: var(--text-color);
   }
+  a.breadcrumb {
+    color: var(--accent-color);
+  }
+  .status-text {
+    color: var(--secondary-color);
+  }
 `;
 
 export const TopContent = styled.div`
